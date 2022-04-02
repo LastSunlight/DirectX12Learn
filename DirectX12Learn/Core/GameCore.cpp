@@ -7,8 +7,8 @@
 namespace GameCore
 {
 	extern HWND g_Hwnd = nullptr;
-	UINT32 g_DisplayWidth = 3840;
-	UINT32 g_DisplayHeight = 2160;
+	UINT32 g_DisplayWidth = 1920;
+	UINT32 g_DisplayHeight = 1080;
 
 
 	HWND GetHwnd()
