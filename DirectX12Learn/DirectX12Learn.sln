@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Core\Core.vcxproj", "{AAF13AEE-1FE5-4EB2-B478-E72901212F9E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX12Init", "DirectX12Init\DirectX12Init.vcxproj", "{14C914AA-DDE8-4E2D-AAE2-D60604B4E15C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AAF13AEE-1FE5-4EB2-B478-E72901212F9E} = {AAF13AEE-1FE5-4EB2-B478-E72901212F9E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
