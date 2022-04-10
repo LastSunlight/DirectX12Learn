@@ -10,8 +10,7 @@
 #include <sdkddkver.h>
 
 #include <Windows.h>
-#include <wrl/client.h>
-#include <wrl/event.h>
+#include <winrt/base.h>
 
 #include <d3d12.h>
 #include <dxgi1_6.h>

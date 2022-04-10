@@ -23,7 +23,7 @@ namespace GameCore
 
 	void InitializeApplication(IGameApp& game)
 	{
-		
+
 	}
 
 	bool UpdateApplication(IGameApp& game)
@@ -37,13 +37,6 @@ namespace GameCore
 	{
 		if (!XMVerifyCPUSupport())
 			return 1;
-
-		Microsoft::WRL::Wrappers::RoInitializeWrapper InitializeWinRT(RO_INIT_MULTITHREADED);
-		if(FAILED(InitializeWinRT))
-		{
-			cout << "InitializeWinRT Failed!" << endl;
-			return 0;
-		}
 
 		//注册窗口类
 		WNDCLASSEX wcex;
@@ -96,8 +89,7 @@ namespace GameCore
 			}
 			if (done)
 				break;
-		}
-		while (UpdateApplication(InApp));
+		} while (UpdateApplication(InApp));
 
 		cout << "Game End!" << endl;
 		return 1;
