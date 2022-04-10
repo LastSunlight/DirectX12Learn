@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameCore.h"
 
@@ -45,7 +45,7 @@ namespace GameCore
 			return 0;
 		}
 
-		//×¢²á´°¿ÚÀà
+		//æ³¨å†Œçª—å£ç±»
 		WNDCLASSEX wcex;
 		wcex.cbSize = sizeof(WNDCLASSEX);
 		wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -66,7 +66,7 @@ namespace GameCore
 			return 0;
 		}
 
-		//´´½¨´°¿ÚÀà
+		//åˆ›å»ºçª—å£ç±»
 		RECT rc = { 0, 0, (LONG)g_DisplayWidth, (LONG)g_DisplayHeight };
 		AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 		g_Hwnd = CreateWindow(InClassName, InClassName, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,

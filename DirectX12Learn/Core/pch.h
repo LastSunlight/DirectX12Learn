@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 
-#pragma warning(disable:4201) //¾¯¸æÆÁ±Î: ÄäÃû½á¹¹ºÍÁªºÏ
-#pragma warning(disable:4238) //¾¯¸æÆÁ±Î: ÓÒÖµ×÷Îª×óÖµ
-#pragma warning(disable:4239) //¾¯¸æÆÁ±Î: ³£Á¿ÒıÓÃ
-#pragma warning(disable:4324) //¾¯¸æÆÁ±Î: ½á¹¹ÌåÄÚ´æ¶ÔÆë
+#pragma warning(disable:4201) //è­¦å‘Šå±è”½: åŒ¿åç»“æ„å’Œè”åˆ
+#pragma warning(disable:4238) //è­¦å‘Šå±è”½: å³å€¼ä½œä¸ºå·¦å€¼
+#pragma warning(disable:4239) //è­¦å‘Šå±è”½: éconstå¼•ç”¨åªèƒ½ç»‘å®šåˆ°å·¦å€¼; èµ‹å€¼æ“ä½œç¬¦æ¥å—å¯¹éconstå¯¹è±¡çš„å¼•ç”¨  
+#pragma warning(disable:4324) //è­¦å‘Šå±è”½: ç»“æ„ä½“å†…å­˜å¯¹é½
 
 #include <winsdkver.h>
 #define _WIN32_WINNT 0x0A00
