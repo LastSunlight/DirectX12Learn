@@ -35,5 +35,7 @@
 #include <ppltasks.h>
 #include <functional>
 
+#include "Utility.h"
 
 using namespace DirectX;
+using namespace winrt;

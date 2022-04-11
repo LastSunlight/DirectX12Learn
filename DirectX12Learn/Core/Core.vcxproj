@@ -22,6 +22,7 @@
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameCore.cpp" />

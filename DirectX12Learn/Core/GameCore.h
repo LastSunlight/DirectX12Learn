@@ -6,6 +6,9 @@ using namespace std;
 namespace GameCore
 {
 	HWND GetHwnd();
+	UINT32 GetDisplayWidth();
+	UINT32 GetDisplayHeight();
+	wstring GetGameClassName();
 
 	class IGameApp
 	{
@@ -15,15 +18,13 @@ namespace GameCore
 		virtual void Startup() = 0;
 		virtual void Cleanup() = 0;
 
-		virtual bool IsDone();
-
 		virtual void Update(float deltaTime) = 0;
-
 		virtual void RenderScene() = 0;
 
-		virtual void RenderUI(class GraphicsContext&) {};
-
-		virtual bool RequiresRaytracingSupport() const { return false; }
+		virtual bool IsDone();
+		virtual void SetWindowTitle() {};
+	public:
+		void GetHardwareAdapter(IDXGIFactory1* pFactory, IDXGIAdapter1** ppAdapter, bool requestHighPerformanceAdapter = true);
 	};
 }
 
