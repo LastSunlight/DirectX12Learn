@@ -20,7 +20,7 @@ void D3DInitApp::Update(float deltaT)
 
 void D3DInitApp::RenderScene()
 {
-
+	//分配指令
 	PopulateCommandList();
 
 	//执行指令
@@ -30,6 +30,7 @@ void D3DInitApp::RenderScene()
 	//页面翻转
 	ThrowIfFailed(m_swapChain->Present(1, 0));
 
+	//执行同步
 	WaitForPreviousFrame();
 }
 
@@ -173,7 +174,6 @@ void D3DInitApp::PopulateCommandList()
 	//清理后台缓冲
 	const float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };
 	m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-
 	//将后台缓冲转换为 present.
 	m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
 
