@@ -4,6 +4,10 @@
 
 #define WINRT_IID_PPV_ARGS(ppType) __uuidof(ppType), ppType.put_void()
 
+#define MEM_KiB(kib)		   (kib * 1024)
+#define MEM_MiB(mib)	MEM_KiB(mib * 1024)
+#define MEM_GiB(gib)	MEM_MiB(gib * 1024)
+
 inline std::string HrToString(HRESULT hr)
 {
     char s_str[64] = {};

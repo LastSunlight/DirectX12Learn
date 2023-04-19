@@ -10,6 +10,9 @@ void D3DInitApp::Cleanup()
 {
 	WaitForPreviousFrame();
 
+	DXGIGetDebugInterface1(NULL, WINRT_IID_PPV_ARGS(m_debug));
+	m_debug->ReportLiveObjects(DXGI_DEBUG_DXGI, (DXGI_DEBUG_RLO_FLAGS)(DXGI_DEBUG_RLO_IGNORE_INTERNAL | DXGI_DEBUG_RLO_DETAIL));
+
 	CloseHandle(m_fenceEvent);
 }
 
@@ -85,6 +88,42 @@ void D3DInitApp::LoadPipeline()
 			D3D_FEATURE_LEVEL_11_0,
 			WINRT_IID_PPV_ARGS(m_device)
 		));
+	}
+
+	//设置显存相关
+	com_ptr<IDXGIAdapter3> dxgiAdapter3 = nullptr;
+	m_HardwareAdapter->QueryInterface(WINRT_IID_PPV_ARGS(dxgiAdapter3));
+	DXGI_QUERY_VIDEO_MEMORY_INFO memInfo;
+	if (SUCCEEDED(dxgiAdapter3->SetVideoMemoryReservation(NULL, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, MEM_GiB(1))))
+	{
+		dxgiAdapter3->QueryVideoMemoryInfo(NULL, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &memInfo);
+	}
+
+	//获取output相关
+	POINT mousePosition;
+	GetCursorPos(&mousePosition);
+	HMONITOR monitor = MonitorFromPoint(mousePosition, MONITOR_DEFAULTTOPRIMARY);
+
+	UINT index = 0;
+	DXGI_OUTPUT_DESC outputDesc;
+	com_ptr<IDXGIOutput> output = nullptr;
+	while (SUCCEEDED(dxgiAdapter3->EnumOutputs(index, output.put())))
+	{
+		ZeroMemory(&outputDesc, sizeof(DXGI_OUTPUT_DESC));
+
+		if (SUCCEEDED(output->GetDesc(&outputDesc)))
+		{
+			if ((outputDesc.Monitor == monitor))
+			{
+				m_output = output;
+				break;
+			}
+			else
+			{
+				output = nullptr;
+			}
+		}
+		index++;
 	}
 
 	//创建命令队列

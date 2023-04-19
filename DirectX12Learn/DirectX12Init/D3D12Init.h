@@ -22,6 +22,9 @@ private:
     //渲染管道对象
     com_ptr<IDXGISwapChain3> m_swapChain;
     com_ptr<IDXGIAdapter1> m_HardwareAdapter;
+    com_ptr<IDXGIOutput> m_output;
+    com_ptr<IDXGIDebug> m_debug;
+
     com_ptr<ID3D12Device> m_device;
     com_ptr<ID3D12Resource> m_renderTargets[FrameCount];
     com_ptr<ID3D12CommandAllocator> m_commandAllocator;
