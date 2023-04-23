@@ -23,7 +23,6 @@ private:
     com_ptr<IDXGISwapChain3> m_swapChain;
     com_ptr<IDXGIAdapter1> m_HardwareAdapter;
     com_ptr<IDXGIOutput> m_output;
-    com_ptr<IDXGIDebug> m_debug;
 
     com_ptr<ID3D12Device> m_device;
     com_ptr<ID3D12Resource> m_renderTargets[FrameCount];
@@ -33,6 +32,14 @@ private:
     com_ptr<ID3D12PipelineState> m_pipelineState;
     com_ptr<ID3D12GraphicsCommandList> m_commandList;
     UINT m_rtvDescriptorSize;
+
+    //debug相关
+#if defined(_DEBUG)
+    com_ptr<IDXGIDebug> m_dxgiDebug;
+    com_ptr<ID3D12DebugDevice> m_debugDevice;
+    com_ptr<ID3D12Debug> m_debugController;
+    com_ptr<ID3D12InfoQueue> m_infoQueue;
+#endif
 
     //同步对象
     UINT m_frameIndex;

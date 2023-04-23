@@ -9,11 +9,11 @@ void D3DInitApp::Startup()
 void D3DInitApp::Cleanup()
 {
 	WaitForPreviousFrame();
-
-	DXGIGetDebugInterface1(NULL, WINRT_IID_PPV_ARGS(m_debug));
-	m_debug->ReportLiveObjects(DXGI_DEBUG_DXGI, (DXGI_DEBUG_RLO_FLAGS)(DXGI_DEBUG_RLO_IGNORE_INTERNAL | DXGI_DEBUG_RLO_DETAIL));
-
 	CloseHandle(m_fenceEvent);
+
+#if defined(_DEBUG)
+	m_dxgiDebug->ReportLiveObjects(DXGI_DEBUG_DXGI, (DXGI_DEBUG_RLO_FLAGS)(DXGI_DEBUG_RLO_IGNORE_INTERNAL | DXGI_DEBUG_RLO_DETAIL));
+#endif
 }
 
 void D3DInitApp::Update(float deltaT)
@@ -51,14 +51,12 @@ void D3DInitApp::SetWindowTitle()
 void D3DInitApp::LoadPipeline()
 {
 	UINT dxgiFactoryFlags = 0;
-
 	//1.启用调试层
 #if defined(_DEBUG)
 	{
-		com_ptr<ID3D12Debug> debugController;
-		if (SUCCEEDED(D3D12GetDebugInterface(WINRT_IID_PPV_ARGS(debugController))))
+		if (SUCCEEDED(D3D12GetDebugInterface(WINRT_IID_PPV_ARGS(m_debugController))))
 		{
-			debugController->EnableDebugLayer();
+			m_debugController->EnableDebugLayer();
 
 			//开启附加调试层
 			dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
@@ -88,7 +86,14 @@ void D3DInitApp::LoadPipeline()
 			D3D_FEATURE_LEVEL_11_0,
 			WINRT_IID_PPV_ARGS(m_device)
 		));
+
 	}
+
+#if defined(_DEBUG)
+	DXGIGetDebugInterface1(NULL, WINRT_IID_PPV_ARGS(m_dxgiDebug));
+	m_device->QueryInterface(WINRT_IID_PPV_ARGS(m_debugDevice));
+	m_device->QueryInterface(WINRT_IID_PPV_ARGS(m_infoQueue));
+#endif
 
 	//设置显存相关
 	com_ptr<IDXGIAdapter3> dxgiAdapter3 = nullptr;
